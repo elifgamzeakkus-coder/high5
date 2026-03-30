@@ -364,7 +364,11 @@ async function send(){
     const data = await res.json();
     removeTyping();
     if(data.content){
-      renderResponse(data.choices.map(c=>c.message?.content||'').join(''));
+      if(data.choices && data.choices.length > 0){
+  renderResponse(data.choices[0].message.content);
+} else {
+  addMsg(`<div class="row"><div class="av ai">👟</div><div class="msg-body"><div class="bubble ai">Groq yanıtı boş geldi: ${JSON.stringify(data)}</div></div></div>`);
+}
     } else {
       addMsg(`<div class="row"><div class="av ai">👟</div><div class="msg-body"><div class="bubble ai">Hata: ${data.error?.message||'Bilinmeyen hata'}. Tekrar dener misin?</div><div class="ts">${now()}</div></div></div>`);
     }
