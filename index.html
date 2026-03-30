@@ -365,7 +365,7 @@ async function send(){
     removeTyping();
     if(data.content){
       if(data.choices && data.choices.length > 0){
-  renderResponse(data.choices[0].message.content);
+  if(data.choices&&data.choices.length>0){renderResponse(data.choices[0].message.content);}else{addMsg(`<div class="row"><div class="av ai">👟</div><div class="msg-body"><div class="bubble ai">Yanit: ${JSON.stringify(data)}</div></div></div>`);}
 } else {
   addMsg(`<div class="row"><div class="av ai">👟</div><div class="msg-body"><div class="bubble ai">Groq yanıtı boş geldi: ${JSON.stringify(data)}</div></div></div>`);
 }
